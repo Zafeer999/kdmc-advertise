@@ -1,0 +1,1 @@
+1. API key and salt is required for payment gateway

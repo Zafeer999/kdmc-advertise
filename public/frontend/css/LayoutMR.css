@@ -1,0 +1,26 @@
+@font-face {font-family:'Sakal Marathi';
+  src: url('../Fonts/SakalMarathi-Normal.eot');
+  src: url('../Fonts/SakalMarathi-Normal.eot?#iefix') format('embedded-opentype'),
+       url('../Fonts/SakalMarathi-Normal.woff') format('woff'),
+       url('../Fonts/SakalMarathi-Normal.ttf') format('truetype'),
+       url('../Fonts/SakalMarathi-Normal.svg#SakalMarathi-Normal') format('svg'); font-weight: normal; font-style: normal;}
+
+
+body, a  {font-weight: 300;font-style: normal;line-height:20px;-webkit-font-smoothing: antialiased;-webkit-text-size-adjust: 100%; line-height:100%}
+
+
+
+.topmenu li {line-height:normal;padding: 0px 5px;}
+.topmenu ul {margin:4px 0 0;}
+.topmenu-bg {padding: 0px 0;}
+.font-resize-in, .font-resize{padding: 8px 6px 4px;line-height: 100%;display: block;}
+.topmenu li .white, .topmenu li .black {padding: 8px 6px 4px; display:block; line-height:100%}
+.banner, section, footer {
+line-height:180%;
+}
+.boxGrid a, #gotowebsite p {
+    line-height:160%;
+}
+.innerBlueMenu section.megaMenus ul li.active .megaMenusList {
+    bottom:-139px;
+}
