@@ -17,14 +17,14 @@
     <div class="container px-sm-10">
         <div class="grid columns-2 gap-4">
             <div class="g-col-2 g-col-xl-1 d-none d-xl-flex flex-column min-vh-screen">
-                <a href="{{ route('frontend.home') }}" class="-intro-x d-flex align-items-center pt-5">
+                {{-- <a href="{{ route('frontend.home') }}" class="-intro-x d-flex align-items-center pt-5">
                     <img alt="Rubick Bootstrap HTML Admin Template" class="w-6" src="{{ asset('admin/dist/images/logo.svg') }}" />
                     <span class="text-white fs-lg ms-3">
                         {{ config('app.name') }}
                     </span>
-                </a>
-                <div class="my-auto">
-                    <img alt="Rubick Bootstrap HTML Admin Template" class="-intro-x w-1/2 mt-n16" src="{{ asset('admin/dist/images/english.png') }}" />
+                </a> --}}
+                <div class="my-auto text-center">
+                    <img alt="Rubick Bootstrap HTML Admin Template" class="-intro-x w-1/2 mt-n16" style="margin: auto" src="{{ asset('admin/dist/images/english.png') }}" />
                     <div class="-intro-x text-white fw-medium fs-4xl lh-base mt-10 align-items-start">
                        KDMC-Advertise Permission
 
