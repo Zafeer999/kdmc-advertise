@@ -68,16 +68,16 @@
                                 <td>
                                     <a href="{{ asset($HoardingPermission?->banner_image) }}" target="blank" class="btn btn-primary">View_Banner_Image</a>
                                 </td>
-                                <td>{{ $HoardingPermission->status_name }}</td>
+                                <td> <span style="background-color: #17a2b8; color: #fff; border-radius: 3px; padding: 2px 4px; text-wrap: nowrap">{{ $HoardingPermission->status_name }}</span></td>
                                 <td>
                                     {{-- <a href="{{ route('view-application',$HoardingPermission->id) }}"><button class="edit-element btn px-2 py-1" title="Edit location"><i class="far fa-pen-to-square"></i> &nbsp;View</button></a> --}}
                                     <a href="{{ route('view-application', $HoardingPermission->id) }}">
                                         <button class="edit-element btn btn-warning me-1 mb-2" title="View Application"><i class="far fa-pen-to-square"></i> &nbsp;View</button>
                                     </a>
-                                    @if ($HoardingPermission->payment_status == 0)
+                                    @if ($HoardingPermission->payment_status == 0 && $HoardingPermission->status >= 4)
                                         @if ($authUser->hasRole(['Admin', 'User']))
                                             <a target="_blank" href="{{ route('initiate-payment', $HoardingPermission->id) }}">
-                                                <button class="btn btn-primary" title="Make Payment"><i class="fas fa-credit-card"></i> &nbsp;Pay </button>
+                                                <button class="btn btn-primary" title="Make Payment"><i class="fas fa-credit-card"></i> &nbsp;Pay</button>
                                             </a>
                                         @endif
                                     @elseif($HoardingPermission->payment_status == 1)
@@ -97,11 +97,7 @@
                                             <button class="btn btn-dark text-white" title="Refunded"><i class="fas fa-file-invoice-dollar"></i> &nbsp;Refunded </button>
                                         </a>
                                     @else
-                                        @if ($authUser->hasRole(['Admin', 'User']))
-                                            <a target="_blank" href="{{ route('initiate-payment', $HoardingPermission->id) }}">
-                                                <button class="btn btn-primary" title="Make Payment"><i class="fas fa-credit-card"></i> &nbsp;Pay </button>
-                                            </a>
-                                        @endif
+
                                     @endif
 
                                 </td>
