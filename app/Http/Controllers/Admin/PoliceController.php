@@ -20,11 +20,12 @@ class PoliceController extends Controller
     /**
      * Display a listing of the pending permissions.
      */
-    public function index($status)
+    public function index($status = 0)
     {
         $authUser = Auth::user();
-        $HoardingPermissions = HoardingPermission::
-                            when( !$authUser->hasRole(['Admin', 'Super Admin']), fn ($q) => $q->where('ward_id', $authUser->ward_id) )
+        $HoardingPermissions = HoardingPermission::query()
+                            ->when( !$authUser->hasRole(['Admin', 'Super Admin']), fn ($q) => $q->where('ward_id', $authUser->ward_id) )
+                            ->when( $authUser->hasRole(['Police']), fn ($q) => $q->where('status', HoardingPermission::APPLICATION_WARD_APPROVE) )
                             ->when( $status == 1, fn ($query) => $query->where('payment_status', HoardingPermissionPayment::PAYMENT_STATUS_SUCCESSFUL) )
                             ->when( $status == 2, fn ($query) => $query->where('payment_status', HoardingPermissionPayment::PAYMENT_STATUS_CANCELLED) )
                             ->latest()->get();
@@ -60,65 +61,71 @@ class PoliceController extends Controller
     /**
      * Approve a application form.
      */
-    // public function ApproveApplication($id)      // TODO: this function is no longer in use
-    // {
-    //     try
-    //     {
-    //         $user = Auth::user();
-    //         $data = HoardingPermission::find($id);
-    //         $data->status = HoardingPermission::APPLICATION_APPROVED;
-    //         $data->status_by = Auth::user()->id;
-    //         $data->status_date = now();
+    public function ApproveApplication($id)
+    {
+        try
+        {
+            $user = Auth::user();
+            $data = HoardingPermission::find($id);
+            $data->status = $user->hasRole(['Ward']) ? HoardingPermission::APPLICATION_WARD_APPROVE : HoardingPermission::APPLICATION_POLICE_APPROVE;
+            $data->status_by = Auth::user()->id;
+            $data->status_date = now();
 
-    //         if($data->save())
-    //         {
-    //             try{
-    //                 Mail::to($user->email)->send(new ApplicationApproveMail($user, $data));
-    //             }
-    //             catch(Exception $e)
-    //             {
-    //                 Log::info("Mail send error");
-    //             }
-    //             return response()->json(['success'=> 'Status updated successfully!']);
-    //         }
-    //     }
-    //     catch(\Exception $e)
-    //     {
-    //         return $this->respondWithAjax($e, 'updating', 'Status');
-    //     }
-    // }
+            if($data->save())
+            {
+                if($user->hasRole(['Police']))
+                {
+                    try{
+                        Mail::to($user->email)->send(new ApplicationApproveMail($user, $data));
+                    }
+                    catch(Exception $e)
+                    {
+                        Log::info("Mail send error");
+                    }
+                }
+                return response()->json(['success'=> 'Status updated successfully!']);
+            }
+        }
+        catch(\Exception $e)
+        {
+            return $this->respondWithAjax($e, 'updating', 'Status');
+        }
+    }
 
     /**
      * Reject application form.
      */
-    // public function RejectApplication(Request $request, $id)        // TODO: this function is no longer in use
-    // {
-    //     try
-    //     {
-    //         $user = Auth::user();
-    //         $data = HoardingPermission::find($id);
-    //         $data->status = HoardingPermission::APPLICATION_REJECT;
-    //         $data->reject_remark = $request->reject_remark;
-    //         $data->status_by = Auth::user()->id;
-    //         $data->status_date = now();
+    public function RejectApplication(Request $request, $id)
+    {
+        try
+        {
+            $user = Auth::user();
+            $data = HoardingPermission::find($id);
+            $data->status = $user->hasRole(['Ward']) ? HoardingPermission::APPLICATION_WARD_REJECT : HoardingPermission::APPLICATION_POLICE_REJECT;
+            $data->reject_remark = $request->reject_remark;
+            $data->status_by = Auth::user()->id;
+            $data->status_date = now();
 
-    //         if($data->save())
-    //         {
-    //             try{
-    //                 Mail::to($user->email)->send(new ApplicationRejectedMail($user, $data));
-    //             }
-    //             catch(Exception $e)
-    //             {
-    //                 Log::info("Mail send error");
-    //             }
-    //             return response()->json(['success'=> 'Status updated successfully!']);
-    //         }
-    //     }
-    //     catch(\Exception $e)
-    //     {
-    //         return $this->respondWithAjax($e, 'updating', 'Status');
-    //     }
-    // }
+            if($data->save())
+            {
+                if($user->hasRole(['Police']))
+                {
+                    try{
+                        Mail::to($user->email)->send(new ApplicationRejectedMail($user, $data));
+                    }
+                    catch(Exception $e)
+                    {
+                        Log::info("Mail send error");
+                    }
+                }
+                return response()->json(['success'=> 'Status updated successfully!']);
+            }
+        }
+        catch(\Exception $e)
+        {
+            return $this->respondWithAjax($e, 'updating', 'Status');
+        }
+    }
 
 
 }

@@ -55,21 +55,21 @@ class DefaultLoginUserSeeder extends Seeder
 
 
         // Police Seeder ##
-        // $policeRole = Role::updateOrCreate(['name' => 'Police']);
-        // $permissions = Permission::where('group', 'police')->orWhere('group', 'dashboard')->pluck('id','id');
-        // $policeRole->syncPermissions($permissions);
+        $policeRole = Role::updateOrCreate(['name' => 'Police']);
+        $permissions = Permission::where('group', 'police')->orWhere('group', 'dashboard')->pluck('id','id');
+        $policeRole->syncPermissions($permissions);
 
-        // $user = User::updateOrCreate([
-        //     'email' => 'police@gmail.com'
-        // ],[
-        //     'ward_id' => '1',
-        //     'police_station_id' => '1',
-        //     'name' => 'Police',
-        //     'email' => 'police@gmail.com',
-        //     'mobile' => '9999999993',
-        //     'password' => Hash::make('12345678'),
-        // ]);
-        // $user->assignRole([$policeRole->id]);
+        $user = User::updateOrCreate([
+            'email' => 'police@gmail.com'
+        ],[
+            'ward_id' => '1',
+            'police_station_id' => '1',
+            'name' => 'Police',
+            'email' => 'police@gmail.com',
+            'mobile' => '9999999993',
+            'password' => Hash::make('12345678'),
+        ]);
+        $user->assignRole([$policeRole->id]);
 
 
 

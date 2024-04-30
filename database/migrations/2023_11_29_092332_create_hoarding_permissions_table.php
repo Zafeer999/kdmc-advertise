@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('contact_no');
             $table->string('advertise_type');
             $table->foreignIdFor(Ward::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignIdFor(Location::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            // $table->foreignIdFor(Location::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->text('location');
             $table->date('from_date');
             $table->date('to_date');
             $table->foreignIdFor(Banner::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();

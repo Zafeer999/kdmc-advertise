@@ -15,8 +15,11 @@ class HoardingPermission extends BaseModel
 {
     use HasFactory, SoftDeletes;
 
-    const APPLICATION_APPROVED = '1';
-    const APPLICATION_REJECT = '2';
+    const APPLICATION_STATUS_PENDING = '0';
+    const APPLICATION_WARD_APPROVE = '1';
+    const APPLICATION_WARD_REJECT = '2';
+    const APPLICATION_POLICE_APPROVE = '3';
+    const APPLICATION_POLICE_REJECT = '4';
 
     const PAYMENT_STATUS_PENDING = '0';
     const PAYMENT_STATUS_SUCCESSFUL = '1';
@@ -30,7 +33,8 @@ class HoardingPermission extends BaseModel
         'contact_no',
         'advertise_type',
         'ward_id',
-        'location_id',
+        // 'location_id',
+        'location',
         'from_date',
         'to_date',
         'banner_id',
@@ -113,10 +117,10 @@ class HoardingPermission extends BaseModel
         return $this->hasOne(Ward::class, 'id', 'ward_id');
     }
 
-    public function Location()
-    {
-        return $this->hasOne(Location::class, 'id', 'location_id');
-    }
+    // public function Location()
+    // {
+    //     return $this->hasOne(Location::class, 'id', 'location_id');
+    // }
 
     public function banner()
     {

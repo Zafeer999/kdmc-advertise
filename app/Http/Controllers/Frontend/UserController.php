@@ -3,25 +3,20 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Factories\PaymentProviderFactory;
-use App\Factories\SmsProviderFactory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\StoreApplicationRequest;
-use App\Mail\ApplicationSubmissionMail;
 use App\Models\Banner;
 use App\Models\Document;
 use App\Models\HoardingPermission;
 use App\Models\HoardingPermissionDoc;
 use App\Models\HoardingPermissionPayment;
-use App\Models\LocationBookedDate;
 use App\Models\Ward;
 use App\Services\SmsService;
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Http\Request;
 
@@ -54,6 +49,7 @@ class UserController extends Controller
         $user = Auth::user();
         $input = $request->validated();
         $input['user_id'] = $user->id;
+        $input['location'] = $input['location_id'];
 
         try
         {
@@ -239,14 +235,14 @@ class UserController extends Controller
             'date' => Carbon::today()->toDateString(),
         ]);
 
-        $dateRanges = CarbonPeriod::create( Carbon::parse($input['from_date']), Carbon::parse($input['to_date']) )->toArray();
-        foreach($dateRanges as $dateRange)
-            LocationBookedDate::create([
-                'location_id' => $input['location_id'],
-                'user_id' => $input['user_id'],
-                'hoarding_permission_id' => $application->id,
-                'date' => $dateRange->toDateString(),
-            ]);
+        // $dateRanges = CarbonPeriod::create( Carbon::parse($input['from_date']), Carbon::parse($input['to_date']) )->toArray();
+        // foreach($dateRanges as $dateRange)
+        //     LocationBookedDate::create([
+        //         'location_id' => $input['location_id'],
+        //         'user_id' => $input['user_id'],
+        //         'hoarding_permission_id' => $application->id,
+        //         'date' => $dateRange->toDateString(),
+        //     ]);
 
         $documents = Document::get();
         foreach($documents as $document)

@@ -29,6 +29,7 @@ class StoreApplicationRequest extends FormRequest
             'advertise_type' => 'required|max:100',
             'ward_id' => 'required',
             'location_id' => 'required',
+            // 'location' => 'required',
             'from_date' => 'required',
             'to_date' => 'required',
             'banner_id' => 'required',

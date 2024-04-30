@@ -56,15 +56,15 @@
                         @foreach ($HoardingPermissions as $HoardingPermission)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $HoardingPermission?->application_no }}</td>
-                                <td>{{ $HoardingPermission?->full_name }}</td>
-                                <td>{{ $HoardingPermission?->contact_no }}</td>
-                                <td>{{ $HoardingPermission?->ward?->name }}</td>
-                                <td>{{ $HoardingPermission?->Location?->location }}</td>
-                                <td>{{ $HoardingPermission?->from_date }}</td>
-                                <td>{{ $HoardingPermission?->to_date }}</td>
-                                <td>{{ $HoardingPermission?->banner?->banner_size .' / '. $HoardingPermission?->banner?->amount }}</td>
-                                <td>{{ $HoardingPermission?->advertise_detail }}</td>
+                                <td>{{ $HoardingPermission->application_no }}</td>
+                                <td>{{ $HoardingPermission->full_name }}</td>
+                                <td>{{ $HoardingPermission->contact_no }}</td>
+                                <td>{{ $HoardingPermission->ward?->name }}</td>
+                                <td>{{ $HoardingPermission->location }}</td>
+                                <td>{{ $HoardingPermission->from_date }}</td>
+                                <td>{{ $HoardingPermission->to_date }}</td>
+                                <td>{{ $HoardingPermission->banner?->banner_size .' / '. $HoardingPermission?->banner?->amount }}</td>
+                                <td>{{ $HoardingPermission->advertise_detail }}</td>
                                 <td>
                                     <a href="{{ asset($HoardingPermission?->banner_image) }}" target="blank" class="btn btn-primary">View_Banner_Image</a>
                                 </td>

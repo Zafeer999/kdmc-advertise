@@ -123,7 +123,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        {{-- <tr>
                                             <th scope="row">1</th>
                                             <td>ठाणे महानगरपालिका क्षेत्रात लावण्यात येणारे कापडी फलक, बॅनर, होर्डिंग व पोस्टर ई. यांचे नियंत्रणाबाबतची कार्यपद्धती व मार्गदर्शक सूचना</td>
                                             <td>
@@ -134,7 +134,7 @@
                                             <th scope="row">2</th>
                                             <td>महाराष्ट्र शासन राजपत्र असाधारण भाग एक-अ—मध्य उप-विभाग</td>
                                             <td><a class="btn btn-info" href="{{ asset('frontend/img/pdf_2.pdf') }}" target="_blank"><i class="fas fa-download"></i></a></td>
-                                        </tr>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
 

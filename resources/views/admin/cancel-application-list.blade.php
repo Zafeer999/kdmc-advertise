@@ -33,7 +33,7 @@
                                 <td>{{ $application->full_name }}</td>
                                 <td>{{ $application->contact_no }}</td>
                                 <td>{{ $application->ward?->name }}</td>
-                                <td>{{ $application->Location?->location }}</td>
+                                <td>{{ $application->location }}</td>
                                 <td>{{ $application->from_date }}</td>
                                 <td>{{ $application->to_date }}</td>
                                 <td>{{ $application->banner?->banner_size . ' | ' . $application->banner?->amount }}</td>

@@ -63,11 +63,13 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::resource('users', App\Http\Controllers\Admin\AdminController::class );
 
     // Police Routes
-    Route::get('permission-requests/{id}', [App\Http\Controllers\Admin\PoliceController::class, 'index'] )->name('permission-requests');
+    Route::get('permission-requests/{id?}', [App\Http\Controllers\Admin\PoliceController::class, 'index'] )->name('permission-requests');
     Route::get('permission-requests-ward/{id}/{ward_id}', [App\Http\Controllers\Admin\PoliceController::class, 'wardWiseList'] )->name('permission-requests-ward');
     Route::get('view-application/{id}', [App\Http\Controllers\Admin\PoliceController::class, 'viewApplication'] )->name('view-application');
-    // Route::get('approve-application/{id}', [App\Http\Controllers\Admin\PoliceController::class, 'ApproveApplication'] )->name('approve-application');        // TODO: this function is no longer in use
-    // Route::put('reject-application/{id}', [App\Http\Controllers\Admin\PoliceController::class, 'RejectApplication'] )->name('reject-application');
+    Route::get('approve-application/{id}', [App\Http\Controllers\Admin\PoliceController::class, 'ApproveApplication'] )->name('approve-application');
+    Route::put('reject-application/{id}', [App\Http\Controllers\Admin\PoliceController::class, 'RejectApplication'] )->name('reject-application');
+    // Route::get('approve-ward-application/{id}', [App\Http\Controllers\Admin\WardController::class, 'ApproveApplication'] )->name('approve-ward-application');
+    // Route::put('reject-ward-application/{id}', [App\Http\Controllers\Admin\WardController::class, 'RejectApplication'] )->name('reject-ward-application');
 
     // Frontend Auth Routes
     Route::get('terms-conditions', [App\Http\Controllers\Frontend\UserController::class, 'termsCondition'] )->name('terms-conditions');

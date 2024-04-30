@@ -8,7 +8,7 @@
             <div class="col">
                 <form class="form-horizontal form-bordered" method="post">
                     @csrf
-                    <section class="card">
+                    <div class="card">
                         <h2 class="fs-lg fw-medium me-auto" style="margin: 15px">View Application</h2>
 
                         <div class="card-body py-2">
@@ -41,7 +41,7 @@
 
                                 <div class="col-md-4">
                                     <label class="col-form-label pt-3 pb-0" for="city"> City <span class="text-danger">*</span></label>
-                                    <input class="form-control" name="city" type="text" placeholder="Enter City" value="Thane" readonly>
+                                    <input class="form-control" name="city" type="text" placeholder="Enter City" value="Kalyan" readonly>
                                     <span class="pristine-error text-theme-6 mt-1 city_err"></span>
                                 </div>
 
@@ -97,7 +97,7 @@
 
                                 <div class="col-md-4">
                                     <label class="col-form-label pt-3 pb-0" for="location"> Location <span class="text-danger">*</span></label>
-                                    <input class="form-control" name="location" type="text" value="{{ $data?->Location?->location }}" readonly>
+                                    <input class="form-control" name="location" type="text" value="{{ $data->location }}" readonly>
                                     <span class="pristine-error text-theme-6 mt-1 ward_err"></span>
                                 </div>
 
@@ -157,20 +157,20 @@
 
                         </div>
 
+                        <div class="card-footer">
+                            @if($data->status == 0 || auth()->user()->hasRole(['Police']) )
+                                <button type="button" class="approve btn btn-primary" data-id="{{ $data->id }}"><i class="far fa-pen-to-square"></i> &nbsp;Approve</button>
+                                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#medium-modal-size-preview" class="btn btn-primary me-1 mb-2"><i class="fa fa-times-circle" aria-hidden="true"></i> &nbsp; Reject </a>
+                            @endif
+                            <a href="javascript::void(0)" onclick="goToPreviousPage()" type="button" class="btn btn-dark">Back</a>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="card-footer">
-                {{-- @if ($data->status == 0)
-                            <button type="button" class="edit-element btn btn-primary" id="addSubmit" data-id="{{ $data->id }}"><i class="far fa-pen-to-square"></i>Approve</button>
-                            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#medium-modal-size-preview" class="btn btn-primary me-1 mb-2"><i class="fa fa-times-circle" aria-hidden="true"></i> &nbsp;Reject </a>
-                            @endif --}}
-                <a href="javascript::void(0)" onclick="goToPreviousPage()" type="button" class="btn btn-dark">Back</a>
-            </div>
-            </section>
-            </form>
         </div>
     </div>
 
-    {{-- <div class="intro-y box mt-5">
+    <div class="intro-y box mt-5">
             <div id="modal-size" class="p-5">
                 <div class="preview">
                     <div id="medium-modal-size-preview" class="modal fade" tabindex="-1" aria-hidden="true">
@@ -181,12 +181,12 @@
                                 <div class="modal-body p-10 text-center">
                                     <h2 class="fs-lg fw-medium me-auto" style="margin: 15px 0">Reject Reason Form</h2>
 
-                                        <input type="hidden" id="edit_model_id" name="edit_model_id" value="{{ $data->id }}">
-                                        <div class="col-md-12">
-                                            <label class="col-form-label pt-3 pb-0" for="reject_remark"> Enter Remark of Reject <span class="text-danger">*</span></label>
-                                            <textarea name="reject_remark" class="form-control" required></textarea>
-                                            <span class="pristine-error text-theme-6 mt-1 reject_remark_err"></span>
-                                        </div>
+                                    <input type="hidden" id="edit_model_id" name="edit_model_id" value="{{ $data->id }}">
+                                    <div class="col-md-12">
+                                        <label class="col-form-label pt-3 pb-0" for="reject_remark"> Enter Remark of Reject <span class="text-danger">*</span></label>
+                                        <textarea name="reject_remark" class="form-control" required></textarea>
+                                        <span class="pristine-error text-theme-6 mt-1 reject_remark_err"></span>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <div class="card-footer">
@@ -200,14 +200,14 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
     </div>
     @push('scripts')
-        {{-- <script>
-            $(".edit-element").on("click", function(e) {
+        <script>
+            $(".approve").on("click", function(e) {
                 e.preventDefault();
-                $(".edit-element").show();
+
                 var model_id = $(this).attr("data-id");
                 var url = "{{ route('approve-application', ":model_id") }}";
 
@@ -241,10 +241,10 @@
                         }
                 });
             });
-        </script> --}}
+        </script>
 
         {{-- Add Reject Remark --}}
-        {{-- <script>
+        <script>
             $("#editForm").submit(function(e) {
                 e.preventDefault();
                 $("#rejectSubmit").prop('disabled', true);
@@ -284,7 +284,7 @@
 
 
             });
-        </script> --}}
+        </script>
 
         <script>
             function goToPreviousPage() {

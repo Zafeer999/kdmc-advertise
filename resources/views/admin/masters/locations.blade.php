@@ -124,9 +124,9 @@
                         @foreach ($locations as $location)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $location?->ward?->name }}</td>
-                                <td>{{ $location?->location }}</td>
-                                <td>{{ $location?->description }}</td>
+                                <td>{{ $location->ward?->name }}</td>
+                                <td>{{ $location->location }}</td>
+                                <td>{{ $location->description }}</td>
                                 <td>
                                     <button class="edit-element btn px-2 py-1" title="Edit location" data-id="{{ $location->id }}"><i class="far fa-pen-to-square"></i> &nbsp;Edit</button>
                                     <button class="btn text-danger rem-element px-2 py-1" title="Delete location" data-id="{{ $location->id }}"><i class="far fa-trash-can"></i> &nbsp;Delete</button>

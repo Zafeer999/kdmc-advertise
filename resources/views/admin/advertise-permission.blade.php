@@ -41,7 +41,7 @@
 
                                 <div class="col-md-4">
                                     <label class="col-form-label pt-3 pb-0" for="city"> City <span class="text-danger">*</span></label>
-                                    <input class="form-control" name="city" type="text" placeholder="Enter City" value="Thane" readonly>
+                                    <input class="form-control" name="city" type="text" placeholder="Enter City" value="Kalyan" readonly>
                                     <span class="pristine-error text-theme-6 mt-1 city_err"></span>
                                 </div>
 
@@ -101,18 +101,20 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label class="col-form-label pt-3 pb-0" for="location_id">Select Location<span class="text-danger">*</span></label>
-                                    <select class="form-control js-example-basic-single" id="location_id" name="location_id">
+                                    <label class="col-form-label pt-3 pb-0" for="location_id">Enter Location<span class="text-danger">*</span></label>
+                                    <textarea name="location_id" id="location_id" cols="10" rows="4" style="max-height: 100px; min-height: 100px" class="form-control"></textarea>
+                                    {{-- <select class="form-control js-example-basic-single" id="location_id" name="location_id">
                                         <option value="">Select Location</option>
-                                    </select>
+                                    </select> --}}
                                     <span class="pristine-error text-theme-6 mt-1 location_id_err"></span>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label class="col-form-label pt-3 pb-0" for="from_date"> Select Available Date <span class="text-danger">*</span></label>
-                                    <select class="form-control js-example-basic-single" id="from_date" name="from_date">
+                                    <label class="col-form-label pt-3 pb-0" for="from_date"> Select From Date <span class="text-danger">*</span></label>
+                                    <input type="date" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="from_date" name="from_date" class="form-control" >
+                                    {{-- <select class="form-control js-example-basic-single" >
                                         <option value="">Select Date</option>
-                                    </select>
+                                    </select> --}}
                                     <span class="pristine-error text-theme-6 mt-1 from_date_err"></span>
                                 </div>
 
@@ -210,7 +212,7 @@
         </script>
 
         <!-- Get Ward Wise Locations -->
-        <script>
+        {{-- <script>
             $("select[name='ward_id']").change( function(e) {
                 e.preventDefault();
 
@@ -241,11 +243,11 @@
                     });
                 }
             });
-        </script>
+        </script> --}}
 
 
         <!-- Get Location Wise From Date -->
-        <script>
+        {{-- <script>
             $("select[name='location_id']").change( function(e) {
                 e.preventDefault();
 
@@ -277,12 +279,12 @@
                     });
                 }
             });
-        </script>
+        </script> --}}
 
 
         <!-- Get From Date Wise To Date -->
         <script>
-            $("select[name='from_date']").change( function(e) {
+            $("input[name='from_date']").change( function(e) {
                 e.preventDefault();
 
                 var from_date = $(this).val();

@@ -215,7 +215,7 @@
                             <strong>Location:</strong>
                         </th>
                         <th style="width: 220px;">
-                            <strong>{{ ucwords($application->location->location) }} </strong>
+                            <strong>{{ ucwords($application->location) }} </strong>
                         </th>
                     </tr>
                     <tr>
