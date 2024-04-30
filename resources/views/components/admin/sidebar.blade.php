@@ -33,14 +33,14 @@
                             </a>
                         </li>
                     @endcan
-                    @can('locations.view')
+                    {{-- @can('locations.view')
                         <li>
                             <a href="{{ route('locations.index') }}" class="side-menu {{ request()->routeIs('locations.index') ? 'side-menu--active side-menu--open' : '' }}">
                                 <div class="side-menu__icon"> <i class="fa fa-map-marker"></i> </div>
                                 <div class="side-menu__title"> Location </div>
                             </a>
                         </li>
-                    @endcan
+                    @endcan --}}
                     @can('banners.view')
                         <li>
                             <a href="{{ route('banners.index') }}" class="side-menu {{ request()->routeIs('banners.index') ? 'side-menu--active side-menu--open' : '' }}">
@@ -78,7 +78,7 @@
             </li>
         @endcan
 
-        @canany(['police-request.approved'])
+        {{-- @canany(['police-request.approved']) --}}
 
 
             <li>
@@ -88,7 +88,7 @@
                 </a>
             </li>
 
-        @endcan
+        {{-- @endcan --}}
 
         @can('application-form')
             <li>

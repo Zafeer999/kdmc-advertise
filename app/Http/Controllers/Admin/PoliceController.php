@@ -26,11 +26,12 @@ class PoliceController extends Controller
         $HoardingPermissions = HoardingPermission::query()
                             ->when( !$authUser->hasRole(['Admin', 'Super Admin']), fn ($q) => $q->where('ward_id', $authUser->ward_id) )
                             ->when( $authUser->hasRole(['Police']), fn ($q) => $q->where('status', HoardingPermission::APPLICATION_WARD_APPROVE) )
+                            ->when( $authUser->hasRole(['User']), fn ($q) => $q->where('status', HoardingPermission::APPLICATION_STATUS_PENDING) )
                             ->when( $status == 1, fn ($query) => $query->where('payment_status', HoardingPermissionPayment::PAYMENT_STATUS_SUCCESSFUL) )
                             ->when( $status == 2, fn ($query) => $query->where('payment_status', HoardingPermissionPayment::PAYMENT_STATUS_CANCELLED) )
                             ->latest()->get();
 
-        return view('admin.police.pending-permission')->with(['HoardingPermissions' => $HoardingPermissions,'status' => $status]);
+        return view('admin.police.pending-permission')->with(['HoardingPermissions' => $HoardingPermissions, 'authUser' => $authUser,'status' => $status]);
     }
 
     public function wardWiseList($status,$ward_id)
