@@ -23,7 +23,7 @@ class AdminController extends Controller
     {
         $users = user::withWhereHas('roles')->latest()->get();
         $wards = Ward::latest()->get();
-        $roles = Role::whereIn('id', [2,4])->get();
+        $roles = Role::whereNot('id', 1)->get();
         $police_stations = PoliceStation::latest()->get();
 
         return view('admin.users')->with(['users' => $users, 'wards' => $wards, 'roles' => $roles, 'police_stations' => $police_stations]);
