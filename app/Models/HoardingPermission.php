@@ -58,6 +58,15 @@ class HoardingPermission extends BaseModel
         'deleted_by',
     ];
 
+    protected $appends = ['status_name'];
+
+
+    public function getStatusNameAttribute()
+    {
+        $statusName = collect(config('default_data.permission_status'));
+        return $statusName->where('id', $this->status)->first()['name'];
+    }
+
     public function generateApplicationNo()
     {
         $applicationNo = '';

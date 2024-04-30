@@ -48,8 +48,8 @@
                             <th style="min-width:90px;">Banner Size / Amount</th>
                             <th style="min-width:70px;">Advertise Details</th>
                             <th>Banner Image</th>
+                            <th>Status</th>
                             <th>Action</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -68,6 +68,7 @@
                                 <td>
                                     <a href="{{ asset($HoardingPermission?->banner_image) }}" target="blank" class="btn btn-primary">View_Banner_Image</a>
                                 </td>
+                                <td>{{ $HoardingPermission->status_name }}</td>
                                 <td>
                                     {{-- <a href="{{ route('view-application',$HoardingPermission->id) }}"><button class="edit-element btn px-2 py-1" title="Edit location"><i class="far fa-pen-to-square"></i> &nbsp;View</button></a> --}}
                                     <a href="{{ route('view-application', $HoardingPermission->id) }}">

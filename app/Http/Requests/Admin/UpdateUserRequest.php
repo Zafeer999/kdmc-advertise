@@ -27,8 +27,7 @@ class UpdateUserRequest extends FormRequest
             'police_station_id' => 'nullable',
             'name' => 'required',
             'email' => 'required|email',
-            'mobile' => 'required|digits:10',
-            'password' => 'required|min:8'
+            'mobile' => 'required|digits:10'
         ];
     }
 }

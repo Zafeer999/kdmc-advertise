@@ -21,7 +21,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = user::withWhereHas('roles')->latest()->get();
+        $users = user::withWhereHas('roles')->with('ward')->latest()->get();
         $wards = Ward::latest()->get();
         $roles = Role::whereNot('id', 1)->get();
         $police_stations = PoliceStation::latest()->get();
@@ -48,9 +48,12 @@ class AdminController extends Controller
             $input = $request->validated();
 
             $input['password'] = Hash::make($input['password']);
+            $input['ward_id'] = $input['ward_id'] ?? PoliceStation::find($request->police_station_id)->ward_id;
+
             $user = User::create(Arr::only($input, Auth::user()->getFillable()));
             $role = Role::find($input['user_type']);
             $user->assignRole([$role->id]);
+
             DB::commit();
 
             return response()->json(['success' => 'User created successfully!']);
@@ -73,9 +76,11 @@ class AdminController extends Controller
     {
         $wards = Ward::latest()->get();
         $police_stations = PoliceStation::latest()->get();
-        $roles = Role::whereIn('id', [2, 4])->get();
-        if ($user) {
+        $roles = Role::whereNot('id', 1)->get();
+        $userRole = $user->roles[0];
 
+        if ($user)
+        {
             $wardHtml = '<span>
                 <option value="">--Select Ward--</option>';
             foreach ($wards as $ward) :
@@ -95,7 +100,7 @@ class AdminController extends Controller
             $userTypeHtml = '<span>
                 <option value="">--Select User Type --</option>';
                 foreach($roles as $role):
-                    $is_select = $role->id == $user->roles[0]->id ? "selected" : "";
+                    $is_select = $role->id == $userRole->id ? "selected" : "";
                     $userTypeHtml .= '<option value="'.$role->id.'" '.$is_select.'>'.$role->name.'</option>';
                 endforeach;
             $userTypeHtml .= '</span>';
@@ -103,6 +108,7 @@ class AdminController extends Controller
             $response = [
                 'result' => 1,
                 'user' => $user,
+                'userRole' => $userRole,
                 'wardHtml' => $wardHtml,
                 'policeHtml' => $policeHtml,
                 'userTypeHtml' => $userTypeHtml
@@ -123,8 +129,12 @@ class AdminController extends Controller
         try {
             DB::beginTransaction();
             $input = $request->validated();
+            $input['ward_id'] = $input['ward_id'] ?? PoliceStation::find($request->police_station_id)->ward_id;
 
             $user->update( Arr::only( $input, Auth::user()->getFillable() ) );
+            $user->roles()->detach();
+            DB::table('model_has_roles')->insert(['role_id'=> $input['user_type'], 'model_type'=> 'App\Models\User', 'model_id'=> $user->id]);
+
             DB::commit();
 
             return response()->json(['success'=> 'Uset updated successfully!']);

@@ -147,12 +147,6 @@
                                 <span class="pristine-error text-theme-6 mt-1 email_err"></span>
                             </div>
 
-                            <div class="col-md-4">
-                                <label class="col-form-label" for="password">Password <span class="text-danger">*</span></label>
-                                <input class="form-control" name="password" type="text" placeholder="Enter Password">
-                                <span class="pristine-error text-theme-6 mt-1 password_err"></span>
-                            </div>
-
                         </div>
 
                     </div>
@@ -185,6 +179,7 @@
                         <tr>
                             <th>Sr No</th>
                             <th>Full Name</th>
+                            <th>Ward</th>
                             <th>Contact</th>
                             <th>Email</th>
                             <th>Type</th>
@@ -196,6 +191,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $user->name }}</td>
+                                <td>{{ $user->ward?->name }}</td>
                                 <td>{{ $user->mobile }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->roles[0]->name }}</td>
@@ -302,14 +298,14 @@
                             $("#edit_police_station").html(data.policeHtml);
                             $("#edit_user_type").html(data.userTypeHtml);
 
-                            // if(data.user.user_type == 2)
-                            // {
-                                $('.ward_div').show();
-                            // }
-                            // else if(data.user.user_type == 3)
-                            // {
+                            if(data.userRole.id == 3)
+                            {
                                 $('.police_div').show();
-                            // }
+                            }
+                            else if(data.userRole.id == 4)
+                            {
+                                $('.ward_div').show();
+                            }
                         }
                         else
                         {
