@@ -71,7 +71,7 @@ class UserController extends Controller
         $authUser = Auth::user();
 
         $applications = HoardingPermission::query()
-                            ->with('ward', 'banner', 'location')
+                            ->with('ward', 'banner')
                             // ->where('status', 1)
                             ->where('from_date','>',date('Y-m-d'))
                             // ->where('from_date', '>', now()->toDateString())
@@ -139,7 +139,7 @@ class UserController extends Controller
         $authUser = Auth::user();
 
         $applications = HoardingPermission::query()
-                            ->with('ward', 'banner', 'location')
+                            ->with('ward', 'banner')
                             // ->where('status', 1)
                             ->withWhereHas('payment', fn ($q) =>
                                     $q->where('status', HoardingPermissionPayment::PAYMENT_STATUS_SUCCESSFUL))
@@ -153,7 +153,7 @@ class UserController extends Controller
 
     public function downloadCertificate(Request $request, HoardingPermission $application)
     {
-        $application = $application->load('payment', 'ward', 'location', 'banner');
+        $application = $application->load('payment', 'ward', 'banner');
 
         $applicationNo = $application->generateApplicationNo();
 
@@ -180,7 +180,7 @@ class UserController extends Controller
         $authUser = Auth::user();
 
         $applications = HoardingPermission::query()
-                            ->with('ward', 'banner', 'location')
+                            ->with('ward', 'banner')
                             // ->where('status', 1)
                             ->withWhereHas('payment', fn ($q) =>
                                     $q->where('status', HoardingPermissionPayment::PAYMENT_STATUS_SUCCESSFUL))
@@ -201,7 +201,7 @@ class UserController extends Controller
 
     public function showCertificate(HoardingPermission $application)
     {
-        $application = $application->load('payment', 'ward', 'location', 'banner');
+        $application = $application->load('payment', 'ward', 'banner');
 
         $qrPath = $application->generateQrCode();
 
