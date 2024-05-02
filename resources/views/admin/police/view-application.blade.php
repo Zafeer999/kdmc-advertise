@@ -158,7 +158,7 @@
                         </div>
 
                         <div class="card-footer">
-                            @if($data->status == 0 || auth()->user()->hasRole(['Police']) )
+                            @if(($data->status == 0 || auth()->user()->hasRole(['Police'])) && !auth()->user()->hasRole(['User']) )
                                 <button type="button" class="approve btn btn-primary" data-id="{{ $data->id }}"><i class="far fa-pen-to-square"></i> &nbsp;Approve</button>
                                 <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#medium-modal-size-preview" class="btn btn-primary me-1 mb-2"><i class="fa fa-times-circle" aria-hidden="true"></i> &nbsp; Reject </a>
                             @endif
