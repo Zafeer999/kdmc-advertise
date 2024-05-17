@@ -22,7 +22,7 @@ class PaymentController extends Controller
 
         $applications = HoardingPermission::query()
                             ->with('ward', 'banner', 'payment')
-                            ->where('status', HoardingPermission::APPLICATION_POLICE_APPROVE)
+                            // ->where('status', HoardingPermission::APPLICATION_POLICE_APPROVE)
                             ->when( $authUser->hasRole(['User']), fn ($q) => $q->where('user_id', $authUser->id) )
                             ->when( $authUser->hasRole(['Police', 'Ward']), fn ($q) => $q->where('ward_id', $authUser->ward_id) )
                             ->when( $status == 1, fn ($query) => $query->where('payment_status', HoardingPermissionPayment::PAYMENT_STATUS_SUCCESSFUL))

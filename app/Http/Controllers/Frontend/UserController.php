@@ -49,7 +49,7 @@ class UserController extends Controller
         $user = Auth::user();
         $input = $request->validated();
         $input['user_id'] = $user->id;
-        $input['location'] = $input['location_id'];
+        $input['price'] = (((25/30) * $input['days']) * ($input['length'] * $input['width']));
 
         try
         {

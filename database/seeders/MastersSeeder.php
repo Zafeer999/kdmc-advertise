@@ -116,12 +116,6 @@ class MastersSeeder extends Seeder
                 'initial' => 'ADC',
                 'is_required' => '1',
             ],
-            [
-                'id' => 2,
-                'name' => 'PAN Card',
-                'initial' => 'PAC',
-                'is_required' => '1',
-            ],
         ];
 
         foreach ($documents as $document) {

@@ -130,6 +130,14 @@
                 </a>
             </li>
         @endcan
+        @can('report.view')
+            <li>
+                <a href="{{ route('reports.index') }}" class="side-menu {{ request()->routeIs('reports.index') ? 'side-menu--active side-menu--open' : '' }}">
+                    <div class="side-menu__icon"> <i class="fas fa-stamp" aria-hidden="true"></i> </div>
+                    <div class="side-menu__title"> Report</div>
+                </a>
+            </li>
+        @endcan
 
         <li>
             <a href="{{ route('show-change-password') }}" class="side-menu {{ request()->routeIs('show-change-password') ? 'side-menu--active side-menu--open' : '' }}">

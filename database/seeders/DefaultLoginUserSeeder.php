@@ -76,7 +76,7 @@ class DefaultLoginUserSeeder extends Seeder
 
         // Ward Seeder ##
         $wardRole = Role::updateOrCreate(['name' => 'Ward']);
-        $permissions = Permission::where('group', 'police')->orwhereIn('id', [29, 33])->orWhere('group', 'dashboard')->pluck('id','id');
+        $permissions = Permission::where('group', 'police')->orwhereIn('id', [29, 33, 37])->orWhere('group', 'dashboard')->pluck('id','id');
         $wardRole->syncPermissions($permissions);
 
         $user = User::updateOrCreate([

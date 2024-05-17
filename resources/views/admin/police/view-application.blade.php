@@ -70,12 +70,6 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label class="col-form-label pt-3 pb-0" for="pan_card_no"> Pan Card No. <span class="text-danger">*</span></label>
-                                    <input class="form-control" name="pan_card_no" type="text" placeholder="Enter Pan Card No." value="{{ $data->pan_card_no }}" readonly>
-                                    <span class="pristine-error text-theme-6 mt-1 pan_card_no_err"></span>
-                                </div>
-
-                                <div class="col-md-4">
                                     <label class="col-form-label pt-3 pb-0" for="advertise_type"> Type of Advertise <span class="text-danger">*</span></label>
                                     <select name="advertise_type" id="advertise_type" class="form-control" disabled>
                                         <option value="">Please Select Type of Advertise</option>
@@ -96,12 +90,6 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label class="col-form-label pt-3 pb-0" for="location"> Location <span class="text-danger">*</span></label>
-                                    <input class="form-control" name="location" type="text" value="{{ $data->location }}" readonly>
-                                    <span class="pristine-error text-theme-6 mt-1 ward_err"></span>
-                                </div>
-
-                                <div class="col-md-4">
                                     <label class="col-form-label pt-3 pb-0" for="from_date"> From Date <span class="text-danger">*</span></label>
                                     <input class="form-control" name="from_date" type="text" value="{{ $data?->from_date }}" readonly>
                                     <span class="pristine-error text-theme-6 mt-1 ward_err"></span>
@@ -114,21 +102,39 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label class="col-form-label pt-3 pb-0" for="banner_size"> Banner Size <span class="text-danger">*</span></label>
-                                    <input class="form-control" name="banner_size" type="text" value="{{ $data?->banner?->banner_size }}" readonly>
-                                    <span class="pristine-error text-theme-6 mt-1 ward_err"></span>
+                                    <label class="col-form-label pt-3 pb-0" for="days"> Days <span class="text-danger">*</span></label>
+                                    <input class="form-control" name="days" type="number" value="{{ $data->days }}" readonly>
+                                    <span class="pristine-error text-theme-6 mt-1 days_err"></span>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="col-form-label pt-3 pb-0" for="length"> Length <span class="text-danger">*</span></label>
+                                    <input class="form-control" name="length" type="number" value="{{ $data->length }}" readonly>
+                                    <span class="pristine-error text-theme-6 mt-1 length_err"></span>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="col-form-label pt-3 pb-0" for="width"> Width <span class="text-danger">*</span></label>
+                                    <input class="form-control" name="width" type="number" value="{{ $data->width }}" readonly>
+                                    <span class="pristine-error text-theme-6 mt-1 width_err"></span>
                                 </div>
 
                                 <div class="col-md-4">
                                     <label class="col-form-label pt-3 pb-0" for="amount"> Fees Amount <span class="text-danger">*</span></label>
-                                    <input class="form-control" name="amount" type="text" value="{{ $data?->banner?->amount }}" readonly>
+                                    <input class="form-control" name="amount" type="text" value="{{ $data->price }}" readonly>
                                     <span class="pristine-error text-theme-6 mt-1 ward_err"></span>
                                 </div>
 
                                 <div class="col-md-4">
                                     <label class="col-form-label pt-3 pb-0" for="advertise_detail"> Details in Advertise <span class="text-danger">*</span></label>
-                                    <textarea name="advertise_detail" class="form-control" readonly>{{ $data?->advertise_detail }}</textarea>
+                                    <textarea name="advertise_detail" class="form-control" cols="10" rows="4" style="max-height: 100px; min-height: 100px" readonly>{{ $data?->advertise_detail }}</textarea>
                                     <span class="pristine-error text-theme-6 mt-1 advertise_detail_err"></span>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="col-form-label pt-3 pb-0" for="location"> Location <span class="text-danger">*</span></label>
+                                    <textarea name="location" class="form-control" cols="10" rows="4" style="max-height: 100px; min-height: 100px" readonly>{{ $data->location }}</textarea>
+                                    <span class="pristine-error text-theme-6 mt-1 location_err"></span>
                                 </div>
 
                                 <div class="col-md-4 zoom-in">

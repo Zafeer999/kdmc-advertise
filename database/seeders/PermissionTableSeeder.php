@@ -194,6 +194,11 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'certificate',
                 'group' => 'frontend',
             ],
+            [
+                'id' => 37,
+                'name' => 'report.view',
+                'group' => 'police',
+            ],
         ];
 
         foreach ($permissions as $permission) {

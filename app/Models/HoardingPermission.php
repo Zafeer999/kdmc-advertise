@@ -33,11 +33,14 @@ class HoardingPermission extends BaseModel
         'contact_no',
         'advertise_type',
         'ward_id',
-        // 'location_id',
         'location',
         'from_date',
         'to_date',
-        'banner_id',
+        'days',
+        'length',
+        'width',
+        'price',
+        // 'banner_id',
         'banner_image',
         'advertise_detail',
         'payment_status',
@@ -52,7 +55,7 @@ class HoardingPermission extends BaseModel
         'pincode',
         'alternate_contact_no',
         'aadhar_card_no',
-        'pan_card_no',
+        // 'pan_card_no',
         'created_by',
         'updated_by',
         'deleted_by',
@@ -111,9 +114,7 @@ class HoardingPermission extends BaseModel
     }
     public static function amountPayable($application)
     {
-        $banner = $application->banner()->first();
-
-        return $banner->amount;
+        return $application->price;
     }
 
     public function payment()
@@ -152,17 +153,17 @@ class HoardingPermission extends BaseModel
         {
             if(Auth::check())
             {
-                $smsProvider = SmsProviderFactory::get('aditya');
-                $hoardingPermission->load('user');
-                $smsProvider->applicationSubmissionSms($hoardingPermission->user?->mobile, $hoardingPermission);
+                // $smsProvider = SmsProviderFactory::get('aditya');
+                // $hoardingPermission->load('user');
+                // $smsProvider->applicationSubmissionSms($hoardingPermission->user?->mobile, $hoardingPermission);
 
-                try{
-                    Mail::to($hoardingPermission->user?->email)->send(new ApplicationSubmissionMail($hoardingPermission->user, $hoardingPermission));
-                }
-                catch(\Exception $e)
-                {
-                    Log::info($e);
-                }
+                // try{
+                //     Mail::to($hoardingPermission->user?->email)->send(new ApplicationSubmissionMail($hoardingPermission->user, $hoardingPermission));
+                // }
+                // catch(\Exception $e)
+                // {
+                //     Log::info($e);
+                // }
                 self::where('id', $hoardingPermission->id)->update([
                     'created_by'=> Auth::user()->id,
                 ]);

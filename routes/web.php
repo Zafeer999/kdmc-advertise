@@ -56,11 +56,18 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::resource('police_stations', App\Http\Controllers\Admin\Masters\PoliceStationController::class );
     Route::resource('documents', App\Http\Controllers\Admin\Masters\DocumentController::class );
 
+
+
     // User Route
     Route::get('advertise-permission', [App\Http\Controllers\Frontend\UserController::class, 'index'] )->name('advertise-permission');
 
+
+
     // Admin Registration
     Route::resource('users', App\Http\Controllers\Admin\AdminController::class );
+    Route::get('reports', [App\Http\Controllers\Admin\ReportController::class, 'index'] )->name('reports.index');
+
+
 
     // Police Routes
     Route::get('permission-requests/{id?}', [App\Http\Controllers\Admin\PoliceController::class, 'index'] )->name('permission-requests');
@@ -70,6 +77,9 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::put('reject-application/{id}', [App\Http\Controllers\Admin\PoliceController::class, 'RejectApplication'] )->name('reject-application');
     // Route::get('approve-ward-application/{id}', [App\Http\Controllers\Admin\WardController::class, 'ApproveApplication'] )->name('approve-ward-application');
     // Route::put('reject-ward-application/{id}', [App\Http\Controllers\Admin\WardController::class, 'RejectApplication'] )->name('reject-ward-application');
+
+
+
 
     // Frontend Auth Routes
     Route::get('terms-conditions', [App\Http\Controllers\Frontend\UserController::class, 'termsCondition'] )->name('terms-conditions');
