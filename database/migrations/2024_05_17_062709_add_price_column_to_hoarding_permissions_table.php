@@ -35,6 +35,7 @@ return new class extends Migration
             $table->dropColumn('days');
             $table->dropColumn('length');
             $table->dropColumn('width');
+            $table->dropColumn('price');
         });
     }
 };
